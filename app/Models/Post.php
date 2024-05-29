@@ -11,6 +11,7 @@ use Illuminate\Database\Eloquent\Model;
 class Post extends Model
 {
     use HasFactory;
+    protected $fillable = ['id', 'content', 'image', 'tags', 'user_id'];
     // nom de la fonction au singulier car 1 seul user en relation
     // cardinalité 1,1
     public function user()
@@ -23,4 +24,5 @@ class Post extends Model
     {
         return $this->hasMany(Comment::class);
     }
+    
 }
