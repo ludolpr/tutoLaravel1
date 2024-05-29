@@ -3,19 +3,18 @@
 namespace App\Http\Controllers;
 
 use App\Models\Post;
+use App\Models\Comment;
 use Illuminate\Http\Request;
-use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\Auth;
 
-class PostController extends Controller
+class CommentController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        $posts = Post::latest()->paginate(10);
-        return view('posts.index', compact('posts'));
+        //
     }
 
     /**
@@ -23,7 +22,7 @@ class PostController extends Controller
      */
     public function create()
     {
-        return view('posts.create');
+        //
     }
 
     /**
@@ -31,17 +30,18 @@ class PostController extends Controller
      */
     public function store(Request $request)
     {
+        // dd($request);
         $request->validate([
             'content' => 'required',
             'image' => 'required',
             'tags' => 'required',
         ]);
-        // dd($request) console log version PHP Laravel;
-        Post::create([
+        Comment::create([
             'content' => $request->content,
             'image' => $request->image,
             'tags' => $request->tags,
-            'user_id' => Auth::user()->id
+            'user_id' => Auth::user()->id,
+            'post_id' => $request->post_id
         ]);
         return redirect()->route('posts.index')
             ->with('success', 'Le produit mis à jour avec succès !');
@@ -60,23 +60,21 @@ class PostController extends Controller
      */
     public function edit(string $id)
     {
-        $post = Post::findOrFail($id);
-        return view('posts.edit', compact('post'));
+        $post = Comment::findOrFail($id);
+        return view('comments.edit', compact('post'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, string $id)
     {
         $updatePost = $request->validate([
             'content' => 'required',
-            'image' => 'required',
-            'tags' => 'required',
         ]);
-        Post::whereId($id)->update($updatePost);
+        Comment::whereId($id)->update($updatePost);
         // ci-dessous erreur ?
-        return redirect()->route('posts.index')
+        return redirect()->route('comments.index')
             ->with('success', 'Le produit mis à jour avec succès !');
     }
 
@@ -85,7 +83,7 @@ class PostController extends Controller
      */
     public function destroy(string $id)
     {
-        $post = Post::findOrFail($id);
+        $post = Comment::findOrFail($id);
         $post->delete();
         return redirect('/posts')->with('success', 'Produit supprimé avec succès');
     }

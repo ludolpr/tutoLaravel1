@@ -1,4 +1,5 @@
 <!doctype html>
+
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 
 <head>
@@ -16,6 +17,7 @@
 
     <!-- Scripts -->
     @vite(['resources/sass/app.scss', 'resources/js/app.js'])
+    <script src="https://kit.fontawesome.com/4d2daebcf2.js" crossorigin="anonymous"></script>
 </head>
 
 <body>
@@ -51,24 +53,24 @@
                         </li>
                         @endif
                         @else
-                        <li class="nav-item dropdown">
-                            <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                                {{ Auth::user()->name }}
-                            </a>
 
-                            <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-                                <a href="{{ route('users.edit', $user = Auth::user()) }}">Mon compte</a>
-
-                                <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault();
-                                                     document.getElementById('logout-form').submit();">
-                                    {{ __('Logout') }}
-                                </a>
-
-                                <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
-                                    @csrf
-                                </form>
+                        <nav class="navbar navbar-expand-lg bg-body-tertiary">
+                            <div class="container-fluid">
+                                <a class="navbar-brand" href="#">Connecté en tant que: {{ Auth::user()->pseudo }}</a>
+                                <a class="navbar-brand" href="/">Home</a>
+                                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+                                    <span class="navbar-toggler-icon"></span>
+                                </button>
+                                <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+                                    <div class="navbar-nav">
+                                        <a class="nav-link active" aria-current="page" href="/posts">Liste des posts</a>
+                                        <a class="nav-link" href="#">texte</a>
+                                        <a class="nav-link" href="#">texte</a>
+                                    </div>
+                                </div>
                             </div>
-                        </li>
+                        </nav>
+
                         @endguest
                     </ul>
                 </div>
@@ -77,9 +79,11 @@
 
         <main class="py-4">
             <div class="container-fluid text-center ">
+
                 @if (session()->has('message'))
                 <p class="alert alert-success">{{ session()->get('message') }}</p>
                 @endif
+
                 @if ($errors->any())
                 <div class="alert alert-danger">
                     <ul>
@@ -89,6 +93,7 @@
                     </ul>
                 </div>
                 @endif
+
             </div>
             @yield('content')
         </main>

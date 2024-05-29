@@ -1,4 +1,4 @@
-@extends ('layouts/app')
+@extends ('layouts.app')
 @section('title')
 Réseau Social Laravel - Mon compte
 @endsection

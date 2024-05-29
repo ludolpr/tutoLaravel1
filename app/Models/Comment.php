@@ -10,6 +10,8 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 class Comment extends Model
 {
     use HasFactory;
+    protected $fillable = ['id', 'content', 'image', 'tags', 'user_id', 'post_id'];
+
     // nom de la fonction au singulier car 1 seul message en relation
     // cardinalité 1,1
     public function post()
