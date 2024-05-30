@@ -58,10 +58,15 @@ class PostController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit(string $id, post $post)
     {
-        $post = Post::findOrFail($id);
+        if (Auth::user()->id == $post->user_id) {
+            $post = Post::findOrFail($id);
         return view('posts.edit', compact('post'));
+        } else {
+            return redirect()->route('home')->withErrors(['erreur' => 'Vous n\'êtes pas autorisé à modifier ce post']);
+        }
+        
     }
 
     /**

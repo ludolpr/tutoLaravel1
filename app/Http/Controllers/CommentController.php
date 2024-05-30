@@ -60,21 +60,24 @@ class CommentController extends Controller
      */
     public function edit(string $id)
     {
+
         $post = Comment::findOrFail($id);
-        return view('comments.edit', compact('post'));
+        // dd($post);
+        return redirect('/posts')->with('success', 'Produit édité avec succès');
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request, Comment $comment)
     {
-        $updatePost = $request->validate([
+        $request->validate([
             'content' => 'required',
         ]);
-        Comment::whereId($id)->update($updatePost);
-        // ci-dessous erreur ?
-        return redirect()->route('comments.index')
+        // dd($request);
+        // $request->all() => recupere tout les resultats de la requete
+        $comment->update($request->all());
+        return redirect()->route('posts.index')
             ->with('success', 'Le produit mis à jour avec succès !');
     }
 

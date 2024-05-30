@@ -21,11 +21,6 @@ Réseau Social Laravel - Mon compte
             <button type="submit" class="btn btn-primary">Valider</button>
         </form>
     </div>
-    <form action="{{ route('users.destroy', $user) }}" method="POST">
-        @csrf
-        @method('DELETE')
-        <button type="submit" class="btn btn-danger">Supprimer le compte</button>
-    </form>
 
 </div>
 @endsection
