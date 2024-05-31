@@ -18,18 +18,18 @@
                             <div class="card">
                                 <div class="card-body bg-secondary text-white">
                                     <div class="mb-3 text-center">
-                                        <p>{{ $post->content }}</p>
+                                        <p>{{content }}</p>
                                     </div>
                                     <div class="form-group mb-3 text-center">
                                         <div class="mb-3">
-                                            <label>Nom de l'image: {{ $post->image }}</label>
+                                            <label>Nom de l'image: {{ image }}</label>
                                         </div>
                                         <div class="mb-3 p-5 bg-light rounded-5">
                                             <img src="../../images/user.png" class="img-fluid rounded-5" alt="Image">
                                         </div>
                                     </div>
                                     <div class="form-group mb-3 text-center">
-                                        <label>Tags de l'image :{{ $post->tags }}</label>
+                                        <label>Tags de l'image :{{tags }}</label>
                                     </div>
                                     <div class="mb-3 text-center">
                                         <a href="{{ route('posts.edit', $post->id) }}" class="btn btn-primary">Éditer</a>
