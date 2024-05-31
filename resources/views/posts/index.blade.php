@@ -1,4 +1,4 @@
-<!-- @extends('layouts.app') -->
+@extends('layouts.app')
 @section('content')
 <div class="container py-5">
     <div class="row">
@@ -27,7 +27,7 @@
                                         <div class="mb-3 p-5 bg-light rounded-5">
                                             <img src="../../images/user.png" class="img-fluid rounded-5" alt="Image">
                                         </div>
-                                    </div>
+                                    </div>a
                                     <div class="form-group mb-3 text-center">
                                         <label>Tags de l'image :{{ $post->tags }}</label>
                                     </div>
